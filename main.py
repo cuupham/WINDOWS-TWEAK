@@ -55,7 +55,7 @@ services = (
     "wisvc",
     "wlidsvc",
     "WMPNetworkSvc",
-    "workfolderssvc",
+    #"workfolderssvc",
     "WSearch",
     "XblAuthManager",
     "XblGameSave",
