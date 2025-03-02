@@ -66,19 +66,18 @@ services = (
     "OneSyncSvc",
     "PimIndexMaintenanceSvc",
     "UnistoreSvc",
+    "NDU",
 )
 
 
-def check_service_exists(service_name: str) -> bool:
+def is_service_exist(service_name: str) -> bool:
     result = subprocess.run(
         ["sc", "query", service_name], capture_output=True, text=True
     )
-
-    # Nếu returncode == 0 tức là dịch vụ tồn tại
     return result.returncode == 0
 
 
-def change_status_to_disable(service_name: str):
+def disable_service(service_name: str):
     try:
         subprocess.run(
             ["sc", "config", service_name, "start=", "disabled"],
@@ -89,18 +88,20 @@ def change_status_to_disable(service_name: str):
         )
         print(f"{service_name} has been disabled successfully")
     except subprocess.CalledProcessError as err:
-        # print(f"Failed to disable {service_name}: {err.stderr.strip()}")
         print(f"Failed to disable {service_name}: {err}")
 
 
 if __name__ == "__main__":
     try:
         for service in services:
-            if check_service_exists(service):
-                change_status_to_disable(service)
-            else:
-                print(f"Service {service} does not exist")
+            # if is_service_exist(service):
+            #     disable_service(service)
+            # else:
+            #     print(f"Service {service} does not exist")
 
+            disable_service(service) if is_service_exist(service) else print(
+                f"Service {service} does not exist"
+            )
     except Exception as e:
         print(f"Exception: {e}")
     finally:
