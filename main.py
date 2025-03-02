@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-services = (
+local_services = (
     "AppVClient",
     "BDESVC",
     "diagnosticshub.standardcollector.service",
@@ -55,7 +55,7 @@ services = (
     "wisvc",
     "wlidsvc",
     "WMPNetworkSvc",
-    #"workfolderssvc",
+    # "workfolderssvc",
     "WSearch",
     "XblAuthManager",
     "XblGameSave",
@@ -66,8 +66,10 @@ services = (
     "OneSyncSvc",
     "PimIndexMaintenanceSvc",
     "UnistoreSvc",
-    "NDU",
+    # "NDU",
 )
+
+services = (*local_services, "NDU")
 
 
 def is_service_exist(service_name: str) -> bool:
