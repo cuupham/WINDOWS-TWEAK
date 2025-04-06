@@ -1,6 +1,6 @@
 import subprocess
 import os
-import sys
+
 
 network_services = (
     "LanmanServer",
@@ -110,26 +110,28 @@ def disable_service(service_name: str):
 
 
 if __name__ == "__main__":
+    srv_collection = None
     print("""Disable services with:
 1. Full list
 2. Services without print
 """)
-    choice = int(input("Enter your choice: "))
-    if choice == 1:
-        srv_list = services
-    elif choice == 2:
-        srv_list = services_without_print
+    choice = input("Enter your choice: ")
+    if choice == "1":
+        srv_collection = services
+    elif choice == "2":
+        srv_collection = services_without_print
     else:
-        print("\nHas Error!!")
-        sys.exit(1)
-
-    try:
-        for service in srv_list:
-            disable_service(service) if is_service_exist(service) else print(
-                f"Service {service} does not exist"
-            )
-    except Exception as e:
-        print(f"Exception: {e}")
-
-    finally:
+        print("\nHas Error!!\n")
         os.system("pause")
+
+    if srv_collection:
+        try:
+            for service in srv_collection:
+                disable_service(service) if is_service_exist(service) else print(
+                    f"Service {service} does not exist"
+                )
+        except Exception as e:
+            print(f"Exception: {e}")
+
+        finally:
+            os.system("pause")
