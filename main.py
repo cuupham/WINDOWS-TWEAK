@@ -111,10 +111,12 @@ def disable_service(service_name: str):
 
 if __name__ == "__main__":
     srv_collection = None
-    print("""Disable services with:
+    print(
+        """Disable services with:
 1. Full list
 2. Services without print
-""")
+"""
+    )
     choice = input("Enter your choice: ")
     if choice == "1":
         srv_collection = services
@@ -131,7 +133,7 @@ if __name__ == "__main__":
                     f"Service {service} does not exist"
                 )
         except Exception as e:
-            print(f"Exception: {e}")
+            print(f"[ERROR]: {e}")
 
         finally:
             os.system("pause")

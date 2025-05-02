@@ -1,3 +1,1 @@
-# Build .EXE
-pyinstaller --clean --optimize=2 --noconfirm --onefile main.py  
-pyinstaller --clean --noconfirm main.spec
+EXE disable các service không cần thiết, giúp giảm process cho cpu và những dịch vụ ảnh hưởng đến RAM.
